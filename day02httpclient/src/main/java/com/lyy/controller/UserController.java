@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import java.util.Enumeration;
 public class UserController {
 
     @RequestMapping(value ="/test1",method = RequestMethod.GET)
+    @ResponseBody
     public String test1(UserRequest userRequest, HttpServletRequest httpServletRequest){
         System.out.println("业务入参："+userRequest);
         //获取所有请求头
@@ -22,7 +24,7 @@ public class UserController {
             String headName = headerNames.nextElement();
             System.out.println(headName+":"+httpServletRequest.getHeader(headName));
         }
-        return "main.html";
+        return "test1";
     }
 
     @PostMapping(value = "/test2")
