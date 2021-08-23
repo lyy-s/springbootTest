@@ -1,0 +1,19 @@
+
+#freemarker:
+#  cache: false
+#  expose-request-attributes: true
+#  expose-session-attributes: true
+#  expose-spring-macro-helpers: true
+#  suffix: .html
+#  settings:
+#    {datetimeFormat: yyyy-MM-dd HH:mm:ss}
+#  request-context-attribute:
+# 编码配置
+#  http:
+#    encoding:
+#      charset: utf-8
+#      force: true
+server:
+  servlet:
+    context-path: /day02httpclient
+  port: 8899
