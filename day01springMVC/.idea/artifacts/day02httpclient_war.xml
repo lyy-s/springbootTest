@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="day02httpclient:war">
+    <output-path>$PROJECT_DIR$/../day02httpclient/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>day02httpclient</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="day02httpclient-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="day02httpclient:war exploded" />
+    </root>
+  </artifact>
+</component>
