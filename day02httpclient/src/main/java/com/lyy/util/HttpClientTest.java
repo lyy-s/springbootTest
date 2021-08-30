@@ -1,15 +1,19 @@
 package com.lyy.util;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
+import org.apache.http.*;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -60,6 +64,33 @@ public class HttpClientTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+//    http://i0.hdslb.com/bfs/archive/9e5f278027ae7f1e1933b6e4002870361da6c20b.png
+    //爬取网上图片
+    @Test
+    public void testDown() throws IOException {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+
+        String strUrl = "http://i0.hdslb.com/bfs/archive/9e5f278027ae7f1e1933b6e4002870361da6c20b.png";
+        HttpGet httpGet = new HttpGet(strUrl);
+        CloseableHttpResponse response = httpClient.execute(httpGet);
+
+        HttpEntity entity = response.getEntity();
+
+        String contentType = entity.getContentType().getValue();
+        String suffix = ".jpg";
+        if (contentType.contains("jpg")||contentType.contains("jpeg")){
+            suffix = ".jpg";
+        }else if (contentType.contains("png")){
+            suffix = ".png";
+        }
+        byte[] bytes = EntityUtils.toByteArray(entity);
+        String localAbsPath = "D:\\a"+suffix;
+        FileOutputStream fos = new FileOutputStream(localAbsPath);
+        fos.write(bytes);
+        fos.close();
+        EntityUtils.consume(entity);
 
     }
 
